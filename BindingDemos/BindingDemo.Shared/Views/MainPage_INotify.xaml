@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="BindingDemo.Views.MainPage_INotify"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BindingDemo.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:BindingDemo.Models"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext >
+        <vm:DummyModel_INotify/>
+    </Page.DataContext>
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Margin" Value="20"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <StackPanel>
+            <StackPanel>
+                <TextBox x:Name="txtUnicaVez" 
+                             PlaceholderText="Texto Unica Vez"
+                             Text="{Binding TextoUnicaVez, Mode=OneTime}"/>
+                <TextBox x:Name="txtNotificacionPorCambio" 
+                             PlaceholderText="Text Notificacion Por Cambio"
+                             Text="{Binding TextNotificacionPorCambio, Mode=OneWay}"/>
+                <TextBox x:Name="txtNotificacionBidireccional" 
+                             PlaceholderText="Text Notificacion Bidireccional" 
+                             Text="{Binding TextNotificacionBidireccional, Mode=TwoWay}"/>
+<Button  Margin="20" Padding="10"
+            FontSize="30" 
+            IsEnabled="{Binding ElementName=tgsEnable, Path=IsOn, Mode=TwoWay}"
+            Click="Button_Click"
+            >Dummy Button</Button>
+<ToggleSwitch x:Name="tgsEnable" Margin="20" Padding="10" 
+                IsOn="{Binding EnableButton}" 
+                FontSize="30">Bloquear Botón</ToggleSwitch>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
